@@ -31,6 +31,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Text.RegularExpressions;
 using System.Collections.Specialized;
+using System.ComponentModel;
 
 using Manos.Http;
 using Manos.Collections;
@@ -86,12 +87,10 @@ namespace Manos.Routing {
 			
 		private void SetupChildrenCollection ()
 		{
-			var children = new C5.ArrayList<RouteHandler> ();
+			var children = new RouteHandlerCollection();
 			
-			children.ItemInserted += HandleChildrenCollectionChanged;
-			children.ItemsAdded += HandleChildrenCollectionChanged;
-			children.ItemRemovedAt += HandleChildrenCollectionChanged;
-			children.ItemsRemoved += HandleChildrenCollectionChanged;
+			children.AddingNew += HandleChildrenCollectionChanged;
+			children.ListChanged += HandleChildrenCollectionChanged;
 			Children = children;
 		}
 
@@ -222,6 +221,11 @@ namespace Manos.Routing {
 				return methods.Contains (request.Method);
 
 			return true;
+		}
+		
+		private class RouteHandlerCollection : BindingList<RouteHandler>, IList<RouteHandler>
+		{
+			
 		}
 	}
 }

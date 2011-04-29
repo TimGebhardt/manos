@@ -36,8 +36,10 @@
     <PlatformTarget>x86</PlatformTarget>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="System" />
-    <Reference Include="System.Core" />
+    <Reference Include="System">
+    </Reference>
+    <Reference Include="System.Core">
+    </Reference>
     <Reference Include="Mono.Posix" />
     <Reference Include="Mono.CSharp" />
     <Reference Include="Mono.C5" />
